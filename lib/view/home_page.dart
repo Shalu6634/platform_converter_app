@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:platform_converter_app/controller/platform_controller.dart';
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 1, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -32,7 +33,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
     var homeController = Get.put(HomeController());
 
     double height = MediaQuery.of(context).size.height;
@@ -44,15 +44,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           Tab(
             icon: Icon(Icons.person_add_alt_1),
           ),
-          // Tab(
-          //   icon: Icon(Icons.chat),
-          // ),
-          // Tab(
-          //   icon: Icon(Icons.call),
-          // ),
-          // Tab(
-          //   icon: Icon(Icons.settings),
-          // ),
+          Tab(
+            text: 'Chat',
+          ),
+          Tab(
+            text: 'Call',
+          ),
+          Tab(
+            text: 'Settings',
+          ),
         ]),
       ),
       body: TabBarView(
@@ -70,20 +70,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           height: height * 0.2,
                           width: width * 0.4,
                           decoration: BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
-                            image: (fileImage != null)
-                                ? DecorationImage(
-                                fit: BoxFit.cover,
-                                image: FileImage(fileImage!))
-                                : const DecorationImage(
-                                fit: BoxFit.cover, image: NetworkImage('')),
-                          ),
+                              color: Colors.grey,
+                              shape: BoxShape.circle,
+                              image: (fileImage != null)
+                                  ? DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: FileImage(fileImage!))
+                                  : const DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                          'assets/image/ganpati.jpeg'),
+                                    )),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 140, left: 130),
+                      padding: const EdgeInsets.only(top: 130, left: 100),
                       child: Center(
                         child: Container(
                           height: height * 0.1 - 12,
@@ -117,14 +119,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   width: width * 0.9,
                   height: height * 0.1 - 30,
                   child: TextFormField(
-                    // controller: txtName,
-                    style: TextStyle(color: Colors.black),
+                    controller: homeController.txtName,
+                    style: const TextStyle(color: Colors.black),
                     cursorColor: Colors.green,
                     decoration: InputDecoration(
                       labelText: 'Full name',
-                      labelStyle: TextStyle(color: Colors.green),
+                      labelStyle: const TextStyle(color: Colors.green),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: Colors.green),
+                          borderSide:
+                              const BorderSide(width: 1, color: Colors.green),
                           borderRadius: BorderRadius.circular(10)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -138,7 +141,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   width: width * 0.9,
                   height: height * 0.1 - 30,
                   child: TextFormField(
-                    // controller: txtEmail,
+                    controller: homeController.txtPhone,
                     style: TextStyle(color: Colors.black),
                     cursorColor: Colors.green,
                     decoration: InputDecoration(
@@ -146,7 +149,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       labelStyle: const TextStyle(color: Colors.green),
                       focusedBorder: OutlineInputBorder(
                           borderSide:
-                          const BorderSide(width: 1, color: Colors.green),
+                              const BorderSide(width: 1, color: Colors.green),
                           borderRadius: BorderRadius.circular(10)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -160,7 +163,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   width: width * 0.9,
                   height: height * 0.1 - 30,
                   child: TextFormField(
-                    // controller: txtEmail,
+                    controller: homeController.txtChat,
                     style: TextStyle(color: Colors.black),
                     cursorColor: Colors.green,
                     decoration: InputDecoration(
@@ -168,7 +171,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       labelStyle: const TextStyle(color: Colors.green),
                       focusedBorder: OutlineInputBorder(
                           borderSide:
-                          const BorderSide(width: 1, color: Colors.green),
+                              const BorderSide(width: 1, color: Colors.green),
                           borderRadius: BorderRadius.circular(10)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -190,11 +193,105 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-              OutlinedButton(onPressed: (){
+                OutlinedButton(
+                    onPressed: () async {
+                      String name = homeController.txtName.text;
+                      String chat = homeController.txtChat.text;
+                      String phone = homeController.txtPhone.text;
+                      homeController.insertAllData(name, chat, phone);
 
-              }, child: Text('save',style: TextStyle(color: Colors.green,fontSize: 17),))
+                      homeController.txtChat.clear();
+                      homeController.txtName.clear();
+                      homeController.txtPhone.clear();
+                      GetSnackBar(
+                        title: ' Add Contact',
+                      );
+                    },
+                    child: const Text(
+                      'save',
+                      style: TextStyle(color: Colors.green, fontSize: 17),
+                    ))
               ],
             ),
+          ),
+          Obx(() {
+            if (homeController.data.isEmpty) {
+              return const Center(child: Text('No items found.'));
+            }
+            return Padding(
+              padding: const EdgeInsets.all(10),
+              child: ListView.builder(
+                itemCount: homeController.data.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                        title: Text(homeController.data[index]['name']),
+                        subtitle: Text(homeController.data[index]['chat']),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                 showDialog(context: context, builder: (context) =>
+                                     AlertDialog(
+                                       title: Text('Update Info'),
+                                       content: Column(
+                                         mainAxisSize: MainAxisSize.min,
+                                         children: [
+                                           TextField(
+                                           controller:homeController.txtName,
+                                             decoration: InputDecoration(),
+                                           ),
+                                           TextField(
+                                             controller:homeController.txtChat,
+                                             decoration: InputDecoration(),
+                                           ),
+                                           TextField(
+                                             controller:homeController.txtPhone,
+                                             decoration: InputDecoration(),
+                                           ),
+
+                                         ],
+                                       ),
+                                       actions: [
+                                         IconButton(onPressed: (){
+                                           homeController.updateData(
+                                               homeController.data[index]['id'],
+                                               homeController.txtName.text,
+                                               homeController.txtChat.text,
+                                               homeController.txtPhone.text);
+                                           Get.back();
+                                         }, icon: Text('Save'))
+
+                                       ],
+                                     )
+                                 );
+                                },
+                                child: const Icon(Icons.edit)),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  homeController.removeData(
+                                    int.parse(
+                                      homeController.data[index]['id'].toString(),
+                                    ),
+                                  );
+                                },
+                                child: const Icon(Icons.delete))
+                          ],
+                        )),
+                  );
+                },
+              ),
+            );
+          }),
+          Column(
+            children: [],
+          ),
+          Column(
+            children: [],
           )
         ],
       ),
