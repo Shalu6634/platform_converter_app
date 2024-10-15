@@ -21,7 +21,7 @@ class SettingsScreen extends StatelessWidget {
               children: [
                 // Profile section
                 ListTile(
-                  leading: Icon(Icons.person),
+                  leading: const Icon(Icons.person),
                   title: const Text('Profile'),
                   subtitle: const Text('Update Profile Data'),
                   trailing: Switch(
@@ -39,40 +39,40 @@ class SettingsScreen extends StatelessWidget {
                         radius: 40,
                         backgroundColor: Colors.grey,
                         child: IconButton(
-                          icon: Icon(Icons.camera_alt, size: 32),
+                          icon: const Icon(Icons.camera_alt, size: 32),
                           onPressed: () {
                             // Functionality to update profile picture
                           },
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.only(top: 10,left: 50,right:50),
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: 'Enter your name...',
                             labelStyle:
                             const TextStyle(color: Colors.green),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1, color: Colors.green),
+                                borderSide:  BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
                                 borderRadius: BorderRadius.circular(10)),
                             enabledBorder: OutlineInputBorder(
+                                borderSide:  BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
                                 borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(top: 10,left: 50,right: 50),
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: 'Enter your bio...',
                             labelStyle:
                             const TextStyle(color: Colors.green),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1, color: Colors.green),
+                                borderSide:  BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
                                 borderRadius: BorderRadius.circular(10)),
                             enabledBorder: OutlineInputBorder(
+                                borderSide:  BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
                                 borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
@@ -85,14 +85,14 @@ class SettingsScreen extends StatelessWidget {
                             onPressed: () {
                               // Add save functionality
                             },
-                            child: Text('SAVE',
+                            child: const Text('SAVE',
                                 style: TextStyle(color: Colors.green)),
                           ),
                           TextButton(
                             onPressed: () {
                               // Add clear functionality
                             },
-                            child: Text('CLEAR',
+                            child: const Text('CLEAR',
                                 style: TextStyle(color: Colors.green)),
                           ),
                         ],
@@ -102,9 +102,9 @@ class SettingsScreen extends StatelessWidget {
                 const Divider(thickness: 1),
                 // Theme section
                 ListTile(
-                  leading: Icon(Icons.brightness_6),
-                  title: Text('Theme'),
-                  subtitle: Text('Change Theme'),
+                  leading: const Icon(Icons.brightness_6),
+                  title: const Text('Theme'),
+                  subtitle: const Text('Change Theme'),
                   trailing: Switch(
                     value: profileController.isDarkTheme.value,
                     onChanged: (value) {

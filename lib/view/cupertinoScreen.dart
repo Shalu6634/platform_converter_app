@@ -76,7 +76,7 @@ class CupertinoScreen extends StatelessWidget {
                               homeController.ImagefilePath.value = "";
                               ImagePicker image = ImagePicker();
                               XFile? xfile = await image.pickImage(
-                                  source: ImageSource.gallery);
+                                  source: ImageSource.camera);
                               String path = xfile!.path;
                               File fileImage = File(path);
                               homeController.setImg(fileImage);
@@ -114,6 +114,7 @@ class CupertinoScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 right: 20, left: 20, top: 20),
                             child: CupertinoTextField(
+                              // style: TextStyle(color: Theme.of(context).primaryColorLight),
                               placeholder: 'Name',
                               cursorColor: Colors.blueAccent,
                               prefix: const Padding(
@@ -132,6 +133,7 @@ class CupertinoScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 right: 20, left: 20, top: 20),
                             child: CupertinoTextField(
+                              // style: TextStyle(color: Theme.of(context).primaryColorLight),
                               placeholder: 'Phone',
                               cursorColor: Colors.blueAccent,
                               prefix: const Padding(
@@ -150,6 +152,7 @@ class CupertinoScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 right: 20, left: 20, top: 20),
                             child: CupertinoTextField(
+                              // style: TextStyle(color: Theme.of(context).primaryColorLight),
                               placeholder: 'Chat',
                               cursorColor: Colors.blueAccent,
                               prefix: const Padding(
@@ -282,9 +285,11 @@ class CupertinoScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Card(
+
+                          margin: EdgeInsets.all(10),
                           child: CupertinoListTile(
                             title:
-                                Text('${homeController.data[index]['name']}'),
+                                Text('${homeController.data[index]['name']}',style: TextStyle(color: Theme.of(context).primaryColorDark),),
                             subtitle:
                                 Text('${homeController.data[index]['chat']}'),
                             leading: CircleAvatar(
@@ -293,7 +298,7 @@ class CupertinoScreen extends StatelessWidget {
                               ),
                             ),
                             trailing: Text(
-                                '${homeController.data[index]['date'] + ' \n ${homeController.data[index]['time']}'}'),
+                                '${homeController.data[index]['date'] + '\n ${homeController.data[index]['time']}'}'),
                           ),
                         ),
                       ],

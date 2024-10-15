@@ -38,7 +38,7 @@ class AddPeople extends StatelessWidget {
                     onTap: () async {
                       homeController.ImagefilePath.value = "";
                       ImagePicker image = ImagePicker();
-                      XFile? xfile = await image.pickImage(source: ImageSource.gallery);
+                      XFile? xfile = await image.pickImage(source: ImageSource.camera);
 
                       if (xfile != null) {  // Check if xfile is not null
                         String path = xfile.path;
@@ -93,12 +93,11 @@ class AddPeople extends StatelessWidget {
                   labelText: 'Full name',
                   labelStyle: const TextStyle(color: Colors.green),
                   focusedBorder: OutlineInputBorder(
-
-                      borderSide:
-                           BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
+                      borderSide: BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
-                  enabledBorder: OutlineInputBorder( borderSide:
-                  BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                      BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
                 ),
               ),
@@ -111,7 +110,7 @@ class AddPeople extends StatelessWidget {
               height: height * 0.1 - 30,
               child: TextFormField(
                 controller: homeController.txtPhone,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
                 cursorColor: Colors.green,
                 decoration: InputDecoration(
                   labelText: 'Phone',
@@ -135,16 +134,16 @@ class AddPeople extends StatelessWidget {
               height: height * 0.1 - 30,
               child: TextFormField(
                 controller: homeController.txtChat,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
                 cursorColor: Colors.green,
                 decoration: InputDecoration(
                   labelText: 'Chat',
                   labelStyle: const TextStyle(color: Colors.green),
                   focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(width: 1, color: Colors.green),
+                     borderSide:  BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
                   enabledBorder: OutlineInputBorder(
+                      borderSide:  BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
                 ),
               ),

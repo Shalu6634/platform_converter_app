@@ -81,7 +81,7 @@ class ChatScreen extends StatelessWidget {
                                                 XFile? xfile =
                                                     await image.pickImage(
                                                         source: ImageSource
-                                                            .gallery);
+                                                            .camera);
 
                                                 if (xfile != null) {
                                                   // Check if xfile is not null
@@ -201,8 +201,8 @@ class ChatScreen extends StatelessWidget {
                                                                       10)),
                                                   hintText: 'Phone....',
                                                   hintStyle: TextStyle(
-                                                      color: Colors.grey)),
-                                            ),
+                                                     color: Theme.of(context).primaryColorDark),)),
+
                                           ],
                                         ),
                                       ),
