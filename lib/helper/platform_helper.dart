@@ -32,9 +32,12 @@ class DbHelper
       onCreate: (db, version) async {
         String sql = '''CREATE TABLE Contact(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        chat TEXT NOT NULL,
-        phone TEXT NOT NULL);
+        img TEXT,
+	      time TEXT,
+	      date TEXT,
+	      chat TEXT,
+	      phone TEXT,
+        name	TEXT);
         ''';
         await db.execute(sql);
       },
@@ -44,11 +47,11 @@ class DbHelper
   }
 
   //add data in table
-  Future<void> insertData(String name, String chat, String phone)  async {
+  Future<void> insertData(String name,String chat, String phone,String img,String time,String date)  async {
     Database? db = await database;
-    String sql = '''INSERT INTO Contact (name,chat,phone)
-    VALUES (?,?,?);''';
-    List args = [name,chat,phone];
+    String sql = '''INSERT INTO Contact (name,chat,phone,img,time,date)
+    VALUES (?,?,?,?,?,?);''';
+    List args = [name,chat,phone,img,time,date];
     await  db.rawInsert(sql,args);
   }
 
@@ -72,12 +75,12 @@ class DbHelper
     await db.rawDelete(sql,args);
   }
 
-  Future<void> updateInfo(String name,String chat,String phone,int id)
+  Future<void> updateInfo(String name,String chat,String phone,String img,int id)
   async {
     Database? db = await database;
-    String sql = '''UPDATE Contact SET name = ?,chat = ?,phone = ? WHERE id = ?;
+    String sql = '''UPDATE Contact SET name = ?,chat = ?,phone = ?,img = ? WHERE id = ?;
     ''';
-    List args = [name,chat,phone,id];
+    List args = [name,chat,phone,id,img];
     await db.rawUpdate(sql,args);
   }
 
