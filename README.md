@@ -2,8 +2,8 @@
 
 
 Description : -
-# The Platform Converter App is a Flutter application that allows users to manage various platform conversion types (e.g., currencies, measurements) using a local SQLite database.
-# This app leverages GetX for state management and implements complete CRUD (Create, Read, Update, Delete) functionality.
+- The Platform Converter App is a Flutter application that allows users to manage various platform conversion types (e.g., currencies, measurements) using a local SQLite database.
+- This app leverages GetX for state management and implements complete CRUD (Create, Read, Update, Delete) functionality.
 
 - User-Friendly Interface: Simple and intuitive design for managing conversions.
 - Persistent Storage: Utilizes SQLite for saving conversion data.
