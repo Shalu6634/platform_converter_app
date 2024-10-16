@@ -42,6 +42,7 @@ class ChatScreen extends StatelessWidget {
                           children: [
                             Text(
                               '${homeController.data[index]['date'] + ' \n ${homeController.data[index]['time']}'}',
+
                             ),
                             SizedBox(
                               width: 10,
@@ -73,40 +74,66 @@ class ChatScreen extends StatelessWidget {
                                           children: [
                                             GestureDetector(
                                               onTap: () async {
+                                                homeController
+                                                    .ImagefilePath.value = "";
+                                                ImagePicker image =
+                                                    ImagePicker();
+                                                XFile? xfile =
+                                                    await image.pickImage(
+                                                        source: ImageSource
+                                                            .gallery);
 
-                                                homeController.ImagefilePath.value = "";
-                                                ImagePicker image = ImagePicker();
-                                                XFile? xfile = await image.pickImage(source: ImageSource.gallery);
                                                 if (xfile != null) {
+                                                  // Check if xfile is not null
                                                   String path = xfile.path;
                                                   File fileImage = File(path);
-                                                  homeController.setImg(fileImage);
-                                                  homeController.ImagefilePath.value = "image";
+                                                  homeController
+                                                      .setImg(fileImage);
+                                                  homeController.ImagefilePath
+                                                      .value = "img";
+                                                } else {
+                                                  // Handle the case where the user did not pick an image
+                                                  print("No image selected");
                                                 }
                                               },
                                               child: Obx(
                                                 () => CircleAvatar(
-                                                  radius: height * 0.050,
+                                                  radius: height * 0.060,
+                                                  backgroundColor:
+                                                      Theme.of(context)
+                                                          .focusColor,
                                                   backgroundImage:
                                                       (homeController
                                                                   .ImagefilePath
                                                                   .value ==
-                                                              "img")
-                                                          ? FileImage(
+                                                              "")
+                                                          ? null
+                                                          : FileImage(
                                                               homeController
                                                                   .ImgPath!
-                                                                  .value)
-                                                          : FileImage(File(
-                                                              homeController
-                                                                          .data[
-                                                                      index]
-                                                                  ['img'])),
+                                                                  .value),
+                                                  child: (homeController
+                                                              .ImagefilePath
+                                                              .value ==
+                                                          "")
+                                                      ? Icon(
+                                                          Icons
+                                                              .add_a_photo_outlined,
+                                                          size: height * 0.035,
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .colorScheme
+                                                              .onPrimaryContainer,
+                                                        )
+                                                      : null,
+                                                  // child: controller.ImgPath!.value == null
+                                                  //     ? Icon(Icons.person, size: 100)
+                                                  //     : null,
                                                 ).marginOnly(
                                                     top: height * 0.020,
                                                     bottom: height * 0.030),
                                               ),
                                             ),
-
                                             SizedBox(
                                               height: 5,
                                             ),
@@ -182,40 +209,20 @@ class ChatScreen extends StatelessWidget {
                                       actions: [
                                         ElevatedButton(
                                           onPressed: () {
-                                            String name =
-                                                homeController.txtName.text;
-                                            String phone =
-                                                homeController.txtPhone.text;
-                                            String chat =
-                                                homeController.txtChat.text;
-                                            String img = homeController
-                                                        .ImagefilePath.value ==
-                                                    "image"
-                                                ? homeController
-                                                    .ImgPath!.value.path
-                                                : homeController.data[index]
-                                                    ['img'];
-                                            int id = homeController.data[index]
-                                                ['id'];
-
                                             homeController.updateData(
-                                                name, phone, chat, img, id);
-                                            Get.back();
+                                                homeController.txtName.text,
+                                                homeController.txtChat.text,
+                                                homeController.txtPhone.text,
+                                                homeController
+                                                    .ImgPath!.value.path,
+                                              homeController.data[index]['id'],);
+
                                             homeController.txtName.clear();
                                             homeController.txtChat.clear();
                                             homeController.txtPhone.clear();
                                             homeController.time = "";
                                             homeController.date = "";
-                                            // homeController.updateData(
-                                            //     homeController.txtName.text,
-                                            //     homeController.txtChat.text,
-                                            //     homeController.txtPhone.text,
-                                            //     homeController
-                                            //         .ImgPath!.value.path,
-                                            //   homeController.data[index]['id'],);
-                                            //
-
-                                            // Get.back();
+                                            Get.back();
                                           },
                                           child: Text(
                                             'save',
