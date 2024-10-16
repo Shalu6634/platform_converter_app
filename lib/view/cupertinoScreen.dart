@@ -65,199 +65,207 @@ class CupertinoScreen extends StatelessWidget {
           tabBuilder: (BuildContext context, int index) {
             switch (index) {
               case 0:
-                return CupertinoTabView(
-                  builder: (BuildContext context) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              homeController.ImagefilePath.value = "";
-                              ImagePicker image = ImagePicker();
-                              XFile? xfile = await image.pickImage(
-                                  source: ImageSource.gallery);
-                              String path = xfile!.path;
-                              File fileImage = File(path);
-                              homeController.setImg(fileImage);
-                              if (homeController.ImgPath != null) {
-                                homeController.ImagefilePath.value = "image";
-                              }
-                            },
-                            child: Obx(
-                              () => CircleAvatar(
-                                radius: height * 0.085,
-                                backgroundColor: Theme.of(context).focusColor,
-                                backgroundImage: (homeController
-                                            .ImagefilePath.value ==
-                                        "")
-                                    ? null
-                                    : FileImage(homeController.ImgPath!.value),
-                                child:
-                                    (homeController.ImagefilePath.value == "")
-                                        ? Icon(
-                                            CupertinoIcons.camera,
-                                            size: height * 0.035,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimaryContainer,
-                                          )
-                                        : null,
-                                // child: controller.ImgPath!.value == null
-                                //     ? Icon(Icons.person, size: 100)
-                                //     : null,
-                              ).marginOnly(
-                                  top: height * 0.020, bottom: height * 0.030),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: 20, left: 20, top: 20),
-                            child: CupertinoTextField(
-                              placeholder: 'Name',
-                              cursorColor: Colors.blueAccent,
-                              prefix: const Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Icon(CupertinoIcons.person),
+                return SingleChildScrollView(
+                  child: CupertinoTabView(
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 30),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                homeController.ImagefilePath.value = "";
+                                ImagePicker image = ImagePicker();
+                                XFile? xfile = await image.pickImage(
+                                    source: ImageSource.gallery);
+                                String path = xfile!.path;
+                                File fileImage = File(path);
+                                homeController.setImg(fileImage);
+                                if (homeController.ImgPath != null) {
+                                  homeController.ImagefilePath.value = "image";
+                                }
+                              },
+                              child: Obx(
+                                () => CircleAvatar(
+                                  radius: height * 0.085,
+                                  backgroundColor: Theme.of(context).focusColor,
+                                  backgroundImage: (homeController
+                                              .ImagefilePath.value ==
+                                          "")
+                                      ? null
+                                      : FileImage(homeController.ImgPath!.value),
+                                  child:
+                                      (homeController.ImagefilePath.value == "")
+                                          ? Icon(
+                                              CupertinoIcons.camera,
+                                              size: height * 0.035,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onPrimaryContainer,
+                                            )
+                                          : null,
+                                  // child: controller.ImgPath!.value == null
+                                  //     ? Icon(Icons.person, size: 100)
+                                  //     : null,
+                                ).marginOnly(
+                                    top: height * 0.020, bottom: height * 0.030),
                               ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.blue,
-                                  )),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: 20, left: 20, top: 20),
-                            child: CupertinoTextField(
-                              placeholder: 'Phone',
-                              cursorColor: Colors.blueAccent,
-                              prefix: const Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Icon(CupertinoIcons.phone),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 20, left: 20, top: 20),
+                              child: CupertinoTextField(
+                                style: TextStyle(color: Theme.of(context).primaryColorDark),
+                                placeholder: 'Name',
+                                cursorColor: Colors.blueAccent,
+                                prefix: const Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Icon(CupertinoIcons.person),
+                                ),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.blue,
+                                    )),
                               ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.blue,
-                                  )),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: 20, left: 20, top: 20),
-                            child: CupertinoTextField(
-                              placeholder: 'Chat',
-                              cursorColor: Colors.blueAccent,
-                              prefix: const Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Icon(CupertinoIcons.chat_bubble_text),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 20, left: 20, top: 20),
+                              child: CupertinoTextField(style: TextStyle(color: Theme.of(context).primaryColorDark),
+                                placeholder: 'Phone',
+                                cursorColor: Colors.blueAccent,
+                                prefix: const Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Icon(CupertinoIcons.phone),
+                                ),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.blue,
+                                    )),
                               ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.blue,
-                                  )),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 20, top: 10),
-                            child: Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    showDatePicker(
-                                      context: context,
-                                      firstDate: DateTime(2000),
-                                      lastDate: DateTime.now(),
-                                      selectableDayPredicate: (day) {
-                                        homeController.date =
-                                            day.year.toString() +
-                                                "-" +
-                                                day.month.toString() +
-                                                "-" +
-                                                day.day.toString();
-                                        return true;
-                                      },
-                                    );
-                                  },
-                                  child: Icon(
-                                    CupertinoIcons.calendar_today,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    size: height * 0.030,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 20, left: 20, top: 20),
+                              child: CupertinoTextField(
+                                style: TextStyle(color: Theme.of(context).primaryColorDark),
+                                placeholder: 'Chat',
+                                cursorColor: Colors.blueAccent,
+                                prefix: const Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Icon(CupertinoIcons.chat_bubble_text),
+                                ),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.blue,
+                                    )),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20, top: 10),
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDatePicker(
+                                        context: context,
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime.now(),
+                                        selectableDayPredicate: (day) {
+                                          homeController.date =
+                                              day.year.toString() +
+                                                  "-" +
+                                                  day.month.toString() +
+                                                  "-" +
+                                                  day.day.toString();
+                                          return true;
+                                        },
+                                      );
+                                    },
+                                    child: Icon(
+                                      CupertinoIcons.calendar_today,
+                                      color:
+                                          Theme.of(context).colorScheme.secondary,
+                                      size: height * 0.030,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '   Pick Date',
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18),
-                                ),
-                              ],
-                            ).marginOnly(left: 15, top: 10),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, top: 10),
-                            child: Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    _selectTime(context);
-                                  },
-                                  child: Icon(
-                                    CupertinoIcons.clock,
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    size: height * 0.030,
+                                  Text(
+                                    '   Pick Date',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18),
                                   ),
-                                ),
-                                Text(
-                                  '   Pick Time',
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18),
-                                ),
-                              ],
-                            ).marginOnly(left: 15, top: 15, bottom: 15),
-                          ),
-                          CupertinoButton(
-                            child: Text(
-                              'SAVE',
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColorLight),
+                                ],
+                              ).marginOnly(left: 15, top: 10),
                             ),
-                            onPressed: () {
-                              homeController.insertAllData(
-                                  homeController.ImgPath!.value.path,
-                                  homeController.time!,
-                                  homeController.date!,
-                                  homeController.txtChat.text,
-                                  homeController.txtPhone.text,
-                                  homeController.txtName.text);
-                              homeController.txtName.clear();
-                              homeController.txtPhone.clear();
-                              homeController.txtChat.clear();
-                              homeController.ImagefilePath.value = "";
-                              homeController.time = "";
-                              homeController.date = "";
-                            },
-                            color: CupertinoColors.activeBlue,
-                          )
-                        ],
-                      ),
-                    );
-                  },
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 10),
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      _selectTime(context);
+                                    },
+                                    child: Icon(
+                                      CupertinoIcons.clock,
+                                      color:
+                                          Theme.of(context).colorScheme.secondary,
+                                      size: height * 0.030,
+                                    ),
+                                  ),
+                                  Text(
+                                    '   Pick Time',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ).marginOnly(left: 15, top: 15, bottom: 15),
+                            ),
+                            CupertinoButton(
+                              child: Text(
+                                'SAVE',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight),
+                              ),
+                              onPressed: () {
+                                homeController.insertAllData(
+                                    homeController.txtName.text,
+                                    homeController.txtChat.text,
+                                    homeController.txtPhone.text,
+                                    homeController.ImgPath!.value.path,
+                                    homeController.date!,
+                                    homeController.time!);
+
+
+                                homeController.ImagefilePath.value = "";
+                                homeController.time = "";
+                                homeController.date = "";
+
+                                homeController.txtChat.clear();
+                                homeController.txtName.clear();
+                                homeController.txtPhone.clear();
+
+                              },
+                              color: CupertinoColors.activeBlue,
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 );
               case 1:
                 if ((homeController.data.length == 0)) {
@@ -284,7 +292,7 @@ class CupertinoScreen extends StatelessWidget {
                         Card(
                           child: CupertinoListTile(
                             title:
-                                Text('${homeController.data[index]['name']}'),
+                                Text('${homeController.data[index]['name']}',style:TextStyle(color: Colors.blue),),
                             subtitle:
                                 Text('${homeController.data[index]['chat']}'),
                             leading: CircleAvatar(

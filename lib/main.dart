@@ -18,6 +18,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus) {
+        FocusScope.of(context).unfocus(); // Hides the keyboard
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     var profileController=Get.put(ProfileController());
@@ -57,30 +69,6 @@ class _MyAppState extends State<MyApp> {
         // ],
       ),
     );
-    //   const CupertinoApp(
-    //   debugShowCheckedModeBanner: false,
-    //   theme: CupertinoThemeData(
-    //       textTheme: CupertinoTextThemeData(
-    //     navLargeTitleTextStyle: TextStyle(
-    //       fontWeight: FontWeight.bold,
-    //       fontSize: 70.0,
-    //       color: CupertinoColors.activeBlue,
-    //     ),
-    //   )),
-    //   home: CupertinoScreen(),
-    // );
-    // GetMaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   theme: ThemeData(
-    //     primaryColor: Colors.purple,
-    //     // toggleableActiveColor: Colors.purple, // Theme color for Switch
-    //   ),
-    //   getPages: [
-    //     GetPage(
-    //       name: '/',
-    //       page: () => const CupertinoScreen(),
-    //     ),
-    //   ],
-    // );
+
   }
 }

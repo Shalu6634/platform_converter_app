@@ -46,33 +46,38 @@ class SettingsScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.only(left: 90),
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: 'Enter your name...',
                             labelStyle:
                             const TextStyle(color: Colors.green),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1, color: Colors.green),
+                                borderSide:  BorderSide(
+                                    width: 1, color:Colors.transparent),
                                 borderRadius: BorderRadius.circular(10)),
                             enabledBorder: OutlineInputBorder(
+
+                                borderSide:  BorderSide(
+                                width: 1, color:Colors.transparent),
                                 borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(left:90),
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: 'Enter your bio...',
                             labelStyle:
                             const TextStyle(color: Colors.green),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 1, color: Colors.green),
+                                borderSide:  const BorderSide(
+                                    width: 1, color:Colors.transparent),
                                 borderRadius: BorderRadius.circular(10)),
                             enabledBorder: OutlineInputBorder(
+                                borderSide:  const BorderSide(
+                                    width: 1, color:Colors.transparent),
                                 borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
@@ -86,14 +91,14 @@ class SettingsScreen extends StatelessWidget {
                               // Add save functionality
                             },
                             child: Text('SAVE',
-                                style: TextStyle(color: Colors.green)),
+                                style: TextStyle(color: Theme.of(context).primaryColorDark)),
                           ),
                           TextButton(
                             onPressed: () {
                               // Add clear functionality
                             },
                             child: Text('CLEAR',
-                                style: TextStyle(color: Colors.green)),
+                                style: TextStyle(color: Theme.of(context).primaryColorDark)),
                           ),
                         ],
                       ),

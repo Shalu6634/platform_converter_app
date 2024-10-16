@@ -17,13 +17,22 @@ class AddPeople extends StatelessWidget {
     var profileController = Get.put(ProfileController());
     Future<void> _selectTime(BuildContext context) async {
       final TimeOfDay? pickedTime = await showTimePicker(
+        builder: (BuildContext context, Widget? child) =>
+            Theme(
+                data:
+                ThemeData.dark().copyWith(
+             colorScheme: ColorScheme.dark(
+               primary: Colors.white,
+             )
+            ),
+                child: child!),
         context: context,
         initialTime: TimeOfDay.now(),
       );
 
       homeController.time =
           pickedTime!.hour.toString() + ":" + pickedTime.minute.toString();
-        }
+    }
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -38,9 +47,11 @@ class AddPeople extends StatelessWidget {
                     onTap: () async {
                       homeController.ImagefilePath.value = "";
                       ImagePicker image = ImagePicker();
-                      XFile? xfile = await image.pickImage(source: ImageSource.gallery);
+                      XFile? xfile =
+                          await image.pickImage(source: ImageSource.gallery);
 
-                      if (xfile != null) {  // Check if xfile is not null
+                      if (xfile != null) {
+                        // Check if xfile is not null
                         String path = xfile.path;
                         File fileImage = File(path);
                         homeController.setImg(fileImage);
@@ -50,7 +61,6 @@ class AddPeople extends StatelessWidget {
                         print("No image selected");
                       }
                     },
-
                     child: Obx(
                       () => CircleAvatar(
                         radius: height * 0.085,
@@ -68,9 +78,7 @@ class AddPeople extends StatelessWidget {
                                     .onPrimaryContainer,
                               )
                             : null,
-                        // child: controller.ImgPath!.value == null
-                        //     ? Icon(Icons.person, size: 100)
-                        //     : null,
+
                       ).marginOnly(top: height * 0.020, bottom: height * 0.030),
                     ),
                   ),
@@ -87,18 +95,19 @@ class AddPeople extends StatelessWidget {
               height: height * 0.1 - 30,
               child: TextFormField(
                 controller: homeController.txtName,
-                style: const TextStyle(color: Colors.black),
-                cursorColor: Theme.of(context).cardColor,
+                style: TextStyle(color: Theme.of(context).primaryColorDark),
+                cursorColor: Theme.of(context).primaryColorDark,
                 decoration: InputDecoration(
                   labelText: 'Full name',
-                  labelStyle: const TextStyle(color: Colors.green),
+                  labelStyle:
+                      TextStyle(color: Theme.of(context).primaryColorDark),
                   focusedBorder: OutlineInputBorder(
-
-                      borderSide:
-                           BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
+                      borderSide: BorderSide(
+                          width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
-                  enabledBorder: OutlineInputBorder( borderSide:
-                  BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
                 ),
               ),
@@ -111,18 +120,19 @@ class AddPeople extends StatelessWidget {
               height: height * 0.1 - 30,
               child: TextFormField(
                 controller: homeController.txtPhone,
-                style: TextStyle(color: Colors.black),
-                cursorColor: Colors.green,
+                style: TextStyle(color: Theme.of(context).primaryColorDark),
+                cursorColor: Theme.of(context).primaryColorDark,
                 decoration: InputDecoration(
                   labelText: 'Phone',
-                  labelStyle: const TextStyle(color: Colors.green),
+                  labelStyle:
+                      TextStyle(color: Theme.of(context).primaryColorDark),
                   focusedBorder: OutlineInputBorder(
-                      borderSide:
-                      BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
+                      borderSide: BorderSide(
+                          width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
                   enabledBorder: OutlineInputBorder(
-                      borderSide:
-                      BorderSide(width: 1, color: Theme.of(context).primaryColorDark),
+                      borderSide: BorderSide(
+                          width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
                 ),
               ),
@@ -135,23 +145,26 @@ class AddPeople extends StatelessWidget {
               height: height * 0.1 - 30,
               child: TextFormField(
                 controller: homeController.txtChat,
-                style: TextStyle(color: Colors.black),
-                cursorColor: Colors.green,
+                style: TextStyle(color: Theme.of(context).primaryColorDark),
+                cursorColor: Theme.of(context).primaryColorDark,
                 decoration: InputDecoration(
                   labelText: 'Chat',
-                  labelStyle: const TextStyle(color: Colors.green),
+                  labelStyle:
+                      TextStyle(color: Theme.of(context).primaryColorDark),
                   focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          const BorderSide(width: 1, color: Colors.green),
+                      borderSide: BorderSide(
+                          width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
                   enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Theme.of(context).primaryColorDark),
                       borderRadius: BorderRadius.circular(10)),
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 20, top: 10),
-              child:  Row(
+              child: Row(
                 children: [
                   GestureDetector(
                     onTap: () {
@@ -171,23 +184,22 @@ class AddPeople extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.calendar_month_outlined,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).primaryColorDark,
                       size: height * 0.030,
                     ),
                   ),
                   Text(
                     '   Pick Date',
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).primaryColorDark,
                         fontWeight: FontWeight.w500,
                         fontSize: 18),
                   ),
                 ],
               ).marginOnly(left: 15, top: 10),
             ),
-
             Padding(
-              padding: const EdgeInsets.only(left: 20,top: 10),
+              padding: const EdgeInsets.only(left: 20, top: 10),
               child: Row(
                 children: [
                   GestureDetector(
@@ -196,14 +208,14 @@ class AddPeople extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.watch_later_outlined,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).primaryColorDark,
                       size: height * 0.030,
                     ),
                   ),
                   Text(
                     '   Pick Time',
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).primaryColorDark,
                         fontWeight: FontWeight.w500,
                         fontSize: 18),
                   ),
